@@ -25,7 +25,7 @@ docker-compose up -d --build
 - DataSourceの追加
 
 以下の赤枠のData Sourcesをクリック
-![Data](./img\dataSource.png)
+![Data](./img/Datasource.png)
 
 Add data sourceをクリック
 ![Add](./img/Pometheus.png)
