@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    hostname: prometheus
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - metrics_data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yaml"
+    ports:
+      - 9090:9090
+    restart: always
+  grafana:
+    image: grafana/grafana:7.5.9
+    container_name: grafana
+    hostname: grafana
+    volumes:
+      - ./grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/var/lib/grafana/provisioning/
+    ports:
+      - 3000:3000
+    env_file:
+      - ./grafana/grafana.env
+    restart: always
+  parrotsec:
+    image: parrotsec/security
+    container_name: parrotsec
+    hostname: parrotsec
+    tty: true
+    network_mode: host
+
+volumes:
+  metrics_data:
+    external: true
+  grafana_data:
+    external: true

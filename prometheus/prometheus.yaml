@@ -1,0 +1,21 @@
+global:
+  # メトリクスを収集する感覚
+  scrape_interval:     5s
+  # 監視ルールを評価する感覚
+  evaluation_interval: 5s
+  # メトリクス収集のタイムアウト値
+  scrape_timeout: 1s
+# メトリクス収集の設定
+scrape_configs:
+  - job_name: prometheus
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+        # prometheusサーバーのホスト
+        - localhost:9090
+  # メトリクス収集するnodeサーバー
+  - job_name: node
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+        - host.docker.internal:9200
